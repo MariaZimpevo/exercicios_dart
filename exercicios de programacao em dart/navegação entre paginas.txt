@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: tela1(),
+    );
+  }
+}
+
+class tela1 extends StatelessWidget {
+  const tela1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text("tela 1"),
+            backgroundColor: Colors.red,
+          ),
+          body: Center(
+            //elevatedbutton é o botão
+            child: ElevatedButton(
+              child: Text("mudar de tela"),
+              //onpressd é o responsavel do funcinamento do botão
+              onPressed: () {
+                print("clicou");
+                //comando abaixo é o responsável pela navegação entre paginas
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return tela2();
+                }));
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class tela2 extends StatelessWidget {
+  const tela2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text("tela 2"),
+            backgroundColor: Colors.pinkAccent,
+          ),
+          body: Center(
+            child: ElevatedButton(
+              child: Text("vai pra tela 1"),
+              onPressed: () {
+                print("clicou no botão");
+                // .pop é o contrário do .push, o push vai pra outra pagina e o pop retorna na pata anterior
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

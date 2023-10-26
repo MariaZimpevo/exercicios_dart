@@ -1,0 +1,14 @@
+A abordagem Code First e a abordagem Database First são duas maneiras diferentes de se trabalhar com o Entity Framework, 
+um framework de mapeamento objeto-relacional (ORM) para .NET.
+
+Na abordagem Code First, o desenvolvedor começa escrevendo as classes de modelo e o contexto do banco de dados. 
+O banco de dados é gerado a partir do código usando migrações. Essa abordagem é ideal para novas aplicações,
+ pois permite que o desenvolvedor trabalhe independentemente da tecnologia do banco de dados. No entanto, 
+essa abordagem não se acopla bem a um banco de dados já existente e exige constante otimização, 
+pois a abstração de dados para alguns bancos nem sempre tem um bom desempenho 
+
+Na abordagem Database First, o desenvolvedor começa com um banco de dados existente e gera o modelo a partir dele. 
+Essa abordagem é ideal para desempenho e esquemas já existentes. 
+A aplicação pode ser feita em cima de um banco de dados que já existe, e a segurança a nível de banco é mais bem ajustada 
+
+Espero ter ajudado!

@@ -1,0 +1,92 @@
+import 'package:flutter/material.dart';
+
+//PASSAR PARÂMETROS ENTRE PAGINAS EM ROTAS NOMEADAS
+void main() {
+  runApp(const MyApp());
+}
+
+//criamos uma classe e seu construtor que vão transitar os dados entre as duas telas
+class Argumentos {
+  final int id;
+  final String nome;
+  Argumentos(this.id, this.nome);
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      initialRoute: "/",
+      routes: {
+        "/": (context) => tela1(),
+        tela2.routeName: (context) => tela2(),
+      },
+    );
+  }
+}
+
+class tela1 extends StatelessWidget {
+  const tela1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: const Text("tela 1"),
+            backgroundColor: Colors.red,
+          ),
+          body: Center(
+            //elevatedbutton é o botão
+            child: ElevatedButton(
+              child: Text("mudar de tela"),
+              //onpressd é o responsavel do funcinamento do botão
+              onPressed: () {
+                print("clicou");
+                //comando abaixo é o responsável pela navegação entre paginas
+                Navigator.pushNamed(context, "/tela2",
+                    arguments: Argumentos(1, "Maria"));
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class tela2 extends StatelessWidget {
+  //colocamos a identificaçao da rota da tela 2 diretamente no seu widget com o static
+  static const routeName = "/tela2";
+
+  const tela2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    // criamos esse argumento para receber os dados da classe Argumentos
+    final argumentos = ModalRoute.of(context)?.settings.arguments as Argumentos;
+    return Container(
+      child: MaterialApp(
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text("tela 2" + argumentos.nome),
+            backgroundColor: Colors.pinkAccent,
+          ),
+          body: Center(
+            child: ElevatedButton(
+              child: Text("vai pra tela 1"),
+              onPressed: () {
+                print("clicou no botão");
+                // .pop é o contrário do .push, o push vai pra outra pagina e o pop retorna na pata anterior
+                Navigator.pop(context);
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

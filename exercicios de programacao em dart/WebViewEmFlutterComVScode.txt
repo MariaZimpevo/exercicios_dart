@@ -1,0 +1,47 @@
+import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+void main() {
+  runApp(WebViewTutorial());
+}
+//webview_flutter: ^2.0.10 na dependência e  minSdkVersion 20, targetSdkVersion 30 no android
+
+class WebViewTutorial extends StatefulWidget {
+  const WebViewTutorial({Key? key}) : super(key: key);
+  @override
+  WebViewTutorialState createState() => WebViewTutorialState();
+}
+
+class WebViewTutorialState extends State<WebViewTutorial> {
+  @override
+  Widget build(BuildContext context) {
+    late WebViewController webViewController;
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: WillPopScope(
+        onWillPop: () async {
+          String? url = await webViewController.currentUrl();
+
+          if (url == "https://github.com/MariaZimpevo") {
+            return true;
+          } else {
+            webViewController.goBack();
+            return false;
+          }
+        },
+        child: Scaffold(
+          body: SafeArea(
+            child: WebView(
+              //initialUrl: "http://10.246.157.114/bib/public/",
+              initialUrl: "https://github.com/MariaZimpevo",
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (WebViewController argWebViewController) {
+                webViewController = argWebViewController;
+              },
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

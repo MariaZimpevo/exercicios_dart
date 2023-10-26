@@ -1,0 +1,242 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  /* esse é para os numeros */ String numero = "0";
+  /* esse é para os sinail ou as operaçõs */ double primeitoNumero = 0.0;
+  /* esse é para os sinail ou as operaçõs */ double segundoNumero = 0.0;
+  /* esse é para executar as operações */ String operacao = "";
+
+  void calcular(String tecla) {
+    // ESSA CONDIÇÃO FAZ COM QUE AO CLICAR EM AC, ELE ME RETORNE A PALAVRA NÚMERO NA TELA
+    if (numero == "Número") {
+      numero = '';
+    }
+    //esses cases todos, é que dão funcionalidade aos números
+    switch (tecla) {
+      case "0":
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+      case ",":
+        setState(() {
+          numero += tecla;
+          numero = numero.replaceAll(",", ".");
+          // A CONDIÇÃO A SEGUIR FAZ COM QUE O PROGRAMA
+          //TE RETORNE DECIMAL OU INTEIRO NA TELA IMPEDINDO QUE DIGITES DOIS ZEROS SEGUIDOS
+          if (numero.contains(".")) {
+            //double numeroDouble = double.parse(numero);
+            //numero = numeroDouble.toString();
+          } else {
+            int numeroInt = int.parse(numero);
+            numero = numeroInt.toString();
+          }
+          numero = numero.replaceAll(".", ",");
+        });
+        break;
+      case "+":
+      case "-":
+      case "X":
+      case "/":
+        operacao = tecla;
+        numero = numero.replaceAll(",", ".");
+        primeitoNumero = double.parse(numero);
+        numero = numero.replaceAll(".", ",");
+        numero = "0";
+        break;
+      case "=":
+        double resultado = 0.0;
+        if (operacao == "/") {
+          numero = numero.replaceAll(",", ".");
+          segundoNumero = double.parse(numero);
+          //print(primeitoNumero / segundoNumero);
+          //return;
+        }
+        if (operacao == "+") {
+          resultado = primeitoNumero + double.parse(numero);
+        }
+        if (operacao == "-") {
+          resultado = primeitoNumero - double.parse(numero);
+        }
+        if (operacao == "X") {
+          resultado = primeitoNumero * double.parse(numero);
+        }
+        if (operacao == "/") {
+          resultado = primeitoNumero / double.parse(numero);
+        }
+        String resultadoString = resultado.toString();
+        // ao somar 1 e 2, o resultado tá ser 3,0
+        //parte1 = 3, parte2 = 0
+        List<String> resultadoPartes = resultadoString.split(".");
+
+        if (int.parse(resultadoPartes[1]) == 0) {
+          setState(() {
+            numero = int.parse(resultadoPartes[0]).toString();
+          });
+          int resultadoformatado = int.parse(resultadoPartes[0]);
+        } else {
+          setState(() {
+            numero = resultado.toString();
+            numero = numero.replaceAll(".", ",");
+          });
+        }
+      case "AC":
+        setState(() {
+          numero = "0";
+        });
+        break;
+
+      case "<X":
+        /*isso fará com que a tecla <x delete os caracteres a direita */
+        setState(() {
+          if (numero.length > 0) {
+            numero = numero.substring(0, numero.length - 1);
+          }
+        });
+
+      default:
+        numero += tecla;
+        break;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Center(
+            child: Text("Calculadora"),
+          ),
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(numero, style: TextStyle(fontSize: 50)),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                // O GestureDetector serve para reconhecer os cliques na tela
+                GestureDetector(
+                    onTap: () => calcular("AC"),
+                    child: Text("AC", style: TextStyle(fontSize: 40))),
+                Text(""),
+                Text(""),
+                GestureDetector(
+                    onTap: () => calcular("<X"),
+                    child: Text("<X", style: TextStyle(fontSize: 40))),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      calcular("7");
+                    },
+                    child: Text("7", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () {
+                      calcular("8");
+                    },
+                    child: Text("8", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () {
+                      calcular("9");
+                    },
+                    child: Text("9", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () {
+                      calcular("/");
+                    },
+                    child: Text("/", style: TextStyle(fontSize: 40))),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      calcular("4");
+                    },
+                    child: Text("4", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () {
+                      calcular("5");
+                    },
+                    child: Text("5", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () {
+                      calcular("6");
+                    },
+                    child: Text("6", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () {
+                      calcular("X");
+                    },
+                    child: Text("X", style: TextStyle(fontSize: 40))),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      calcular("1");
+                    },
+                    child: Text("1", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () => calcular("2"),
+                    child: Text("2", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () => calcular("3"),
+                    child: Text("3", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () => calcular("-"),
+                    child: Text("-", style: TextStyle(fontSize: 40))),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                GestureDetector(
+                    onTap: () => calcular("0"),
+                    child: Text("0", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () => calcular(","),
+                    child: Text(",", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () => calcular("="),
+                    child: Text("=", style: TextStyle(fontSize: 40))),
+                GestureDetector(
+                    onTap: () => calcular("+"),
+                    child: Text("+", style: TextStyle(fontSize: 40))),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,42 @@
+class pessoa{
+  String nome;
+  int idade;
+  double altura, peso;
+  
+  pessoa (this.nome, this.idade, this.altura, this.peso);
+  
+  void comer(){
+    print("$nome de $peso de peso comeu mais");
+  }
+  void andar(){
+    print("$nome de $altura de altura andou 100m essa semana");
+  }
+  
+ }
+  class engenheiro extends pessoa{
+    int mimoso;
+    engenheiro(String nome,int idade, double altura, double peso, this.mimoso): super(nome,idade,altura,peso);
+    void mimo(){
+      mimoso +=100;
+      print("o rosto do $nome aumentou o mimo para $mimoso");
+    }
+    
+ }
+class assistente extends pessoa{
+  assistente(String nome, int idade, double altura, double peso): super(nome,idade,altura,peso);
+  bool estaamigavel(){
+    return true;
+    
+  }
+}
+void main() {
+ engenheiro Engenheiro = engenheiro("Mukanda",27,1.65,68.3,10);
+  Engenheiro.comer();
+  Engenheiro.andar();
+  Engenheiro.mimo();
+  
+  assistente Assistente = assistente("Diolinda", 26, 1.64, 65.7);
+  Assistente.comer();
+  Assistente.andar();
+  print("está amigável?${Assistente.estaamigavel()}");
+ }

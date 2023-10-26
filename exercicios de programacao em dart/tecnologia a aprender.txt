@@ -1,0 +1,13 @@
+Se tratando de tecnologias/ferramentas, aprender a usar:
+
+LINQ
+Entity Framework
+Fundamentos de SQL
+GIT
+Protocolo HTTP/HTTPS
+Injeção de dependência
+Testes de unidade / serviço
+Mapeamento de objetos
+Framework de Log
+Princípios SOLID
+Design Patterns

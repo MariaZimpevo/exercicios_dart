@@ -1,0 +1,15 @@
+Desenvolvi um projeto para a faculdade utilizando C#, Visual Studio, ASP.NET Framework e arquitetura MVC.
+
+No começo não sabia nada, porém as ferramentas são sensacionais. A própria IDE do Visual Studio permite criar um modelo de projeto baseado no ASP.NET que é um Framework para aplicações WEB, que fornece inúmeros recursos e uma facilidade imensa em se trabalhar.
+
+Utilizei o banco de dados do SQL Server, que já vem integrado ao Visual Studio e com a utilização do recurso "migrations" que permite versionar o controle do banco, onde caso ocorra um erro em alguma modificação em tabela, você possa voltar a uma versão anterior.
+
+Além disso é possível gerar as classes na arquitetura MVC com o entity framework, basta criar suas entidades.
+
+Resumindo: Visual Studio - na minha opinião melhor IDE. ASP.NET - Framework para desenvolvimento de aplicações web. Banco de dados - de sua escolha, SQL Server e migrations facilitam a utilização com o Visual Studio. Arquitetura MVC - bastante utilizada atualmente. Entity Framerwork - mapeamento de relações.
+
+Com isso consegui desenvolver um projeto sem saber praticamente nada, apenas com alguns tutoriais.
+
+Bom, primeiro você obviamente precisa aprender a linguagem c#. Se você está começando, estude .net core, e depois estude LINQ e expressões lambda, com eles você consegue criar uma aplicação web muito boas sem escrever um único código SQL.
+
+E claro estude o padrão MVC.
